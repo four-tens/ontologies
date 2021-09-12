@@ -4,8 +4,9 @@
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix owl:     <http://www.w3.org/2002/07/owl#> .
 @prefix foaf:	<http://xmlns.com/foaf/0.1/> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
 
-<http://four-tens.github.io/ontologies/base/>
+scdb:
     rdf:type owl:Ontology ;
     dcterms:title "Strictly Come Dancing base ontology"@en ;
     dcterms:created "2021-09-12"^^xsd:date ;
@@ -13,3 +14,44 @@
     dcterms:description "Strictly Come Dancing as an ontological model"@en ;
     foaf:maker
             [ foaf:name "Alex Wilson"; foaf:homepage <https://blog.probablyfine.co.uk/> ].
+
+### Classes
+
+scdb:Person rdf:type owl:Class;
+    rdfs:label "Person"@en ;
+    rdfs:comment "A person."@en ;
+    rdfs:isDefinedBy scdb: .
+
+scdb:Professional rdf:type owl:Class ;
+    rdfs:label "Professional"@en ;
+    rdfs:comment "A professional dancer competing within the show."@en ;
+    rdfs:subClassOf scdb:Person ;
+    rdfs:isDefinedBy scdb: .
+
+scdb:Celebrity rdf:type owl:Class ;
+    rdfs:label "Celebrity"@en ;
+    rdfs:comment "A celebrity contestant competing within the show."@en ;
+    rdfs:subClassOf scdb:Person ;
+    rdfs:isDefinedBy scdb: .
+
+scdb:Judge rdf:type owl:Class ;
+    rdfs:label "Judge"@en ;
+    rdfs:comment "A judge on the show."@en ;
+    rdfs:subClassOf scdb:Person ;
+    rdfs:isDefinedBy scdb: .
+
+### Object properties
+
+scdb:hasCelebrityPartner rdf:type owl:ObjectProperty ;
+    rdfs:label "Has celebrity partner"@en ;
+    rdfs:comment "This professional has this celebrity partner"@en ;
+    rdfs:domain scdb:Professional  ;
+    rdfs:range scdb:Celebrity;
+    rdfs:isDefinedBy scdb:  .
+
+scdb:hasProfessionalPartner rdf:type owl:ObjectProperty ;
+     rdfs:label "Has professional partner"@en ;
+     rdfs:comment "This celebrity has this professional partner"@en ;
+     rdfs:domain scdb:Celebrity  ;
+     rdfs:range scdb:Professional ;
+     rdfs:isDefinedBy scdb:  .
